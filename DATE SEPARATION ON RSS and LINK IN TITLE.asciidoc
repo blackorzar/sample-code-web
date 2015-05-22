@@ -19,83 +19,49 @@ Add this into the rts.js (or home.js) or create a widget and put inside <script>
 <script>
 
 $(document).ready {
-
  // Span on dates for rss feeds
-
  rssDateTitleAddDetailedSpans();
-
  rssAddLinkToTitle();
-
 }
 
 
 
 // Classes on dates for rss feeds
-
 function rssDateTitleAddDetailedSpans() {
-
  $(".rssitem-title").each (function () {
-
   var title = $(this).text().replace(/^\s\s*/, '').replace(/\s\s*$/, ''); // trim
-
    //starts date - Title
-
   if (/^\d\d?\/\d\d?\/\d\d\d\d - .*$/.exec(title)) {
-
    //Include detailed styling for rssitem-title
-
    // Split the title by the dash "-"  . This way if the actual title has dashed they don't affect this code.
-
    //http://stackoverflow.com/questions/4607745/split-string-only-on-first-instance-of-specified-character
-
    var parts = title.split("-");    
-
    var dateStr = parts[0].replace(/\s\s*$/, ''); //Remove whitespaces
-
    var dateDetailed = dateStr.split("/");
 
    if (dateDetailed.length === 3) {
-
     dateStr = "<span class='rssDetailedDate'> <span class='rssDetailedDate-month'>" + dateDetailed[0] + "</span><span class='rssDetailed-separator-date-month-day'>/</span><span class='rssDetailedDate-day'>" + dateDetailed[1] + "</span><span class='rssDetailed-separator-date-day-year'>/</span><span class='rssDetailedDate-year'>" + dateDetailed[2] + "</span></span>";
-
    } else {
-
     dateStr = "<span class='rssDetailedDate'>" + dateStr + "</span>";
-
    }
 
    var separatorDateTitle = "<span class='rssDetailed-separator-datetitle'> - </span>";
-
    parts.shift(); //removes first element
-
    var titleStr = parts.join("-").replace(/^\s\s*/, '');
-
    titleStr =  "<span class='rssDetailedTitle'>"+ titleStr + "</span>";
-
    $(this).html(dateStr + separatorDateTitle + titleStr);
-
   }
-
  });
-
 }
 
 // Add Link to Title in RSS
-
 function rssAddLinkToTitle(){
-
- $(".rssitem-link").hide();
-
- $(".rssitemcontainer").each(function(){
-
-  var detailedTitle = $(this).find('.rssDetailedTitle').text();
-
-  var rssLink = $(this).find('.rssitem-link a').attr('href');
-
-  $(this).find('.rssDetailedTitle').html('<a href="'+rssLink+'">'+detailedTitle+'</a>');
-
- });     
-
+  $(".rssitem-link").hide();
+  $(".rssitemcontainer").each(function(){
+   var detailedTitle = $(this).find('.rssDetailedTitle').text();
+   var rssLink = $(this).find('.rssitem-link a').attr('href');
+   $(this).find('.rssDetailedTitle').html('<a href="'+rssLink+'">'+detailedTitle+'</a>');
+  });     
 }
 </script>
 
