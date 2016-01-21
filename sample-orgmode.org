@@ -5,3 +5,7 @@ Some content here
 More content here
 * Level 2
 Some content on level 2 here
+| A table | Second column |
+| Second part of the table | here |
+|-----------|-------|
+|after division |   |
